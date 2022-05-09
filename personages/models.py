@@ -39,7 +39,7 @@ class Personage(models.Model):
 
     def __str__(self):
         return f"Personage: \n" \
-               f"name: {self.pers_name!r}, pronoun: {self.pers_pronoun!r}, " \
+               f"name: {self.pers_name}, pronoun: {self.pers_pronoun!r}, " \
                f"description: {self.pers_description!r}, parties: {self.get_parties()}"
 
     def get_parties(self):
