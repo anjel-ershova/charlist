@@ -1,3 +1,5 @@
+import unittest
+
 from django.test import TestCase
 from django.test.utils import setup_test_environment, override_settings
 
@@ -11,6 +13,7 @@ class PersonageTest(TestCase):
         personages_count = Personage.objects.count()
         self.assertEqual(personages_count, 1)
 
+    @unittest.skip("demonstrating skipping")
     @override_settings(DEBUG=True)
     def test_main_login_required(self):
         response = self.client.get('/all_personages')
