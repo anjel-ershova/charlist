@@ -1,6 +1,6 @@
-from django.contrib import admin
-from django.urls import path, include
-from charlist.settings import DEBUG
+# from django.contrib import admin - до подключения дебаг-функции
+from django.urls import path, include  # pylint: disable=unused-import
+from charlist.settings import DEBUG  # pylint: disable=unused-import
 
 import personages.views as personages
 

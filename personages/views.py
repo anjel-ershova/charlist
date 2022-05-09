@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
-from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.mixins import UserPassesTestMixin  # ,LoginRequiredMixin, PermissionRequiredMixin
+from django.shortcuts import render  # , get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView, UpdateView
 from personages.models import Personage
@@ -17,6 +17,7 @@ def all_personages(request):
     }
 
     return render(request, 'personages/all_personages.html', context=context)
+
 
 # вариант FBV - Function Detailed View
 # def personage_details(request, pk):
@@ -46,7 +47,7 @@ class PersonageDetailView(PageTitleMixin, DetailView):
     page_title = 'Personage detail'
     # pk_url_kwarg = 'pk' # нужно, если как primary key используется не 'pk' или 'slug'
     # context_object_name = 'personage_details' # можно переопределять, если нужен кастом,
-                                                # но если не определено, за контекст берется имя класса
+    # но если не определено, за контекст берется имя класса
 
 
 # @login_required # ERROR
@@ -57,8 +58,9 @@ class PersonageDetailView(PageTitleMixin, DetailView):
 class PersonageCreateView(UserPassesTestMixin, CreateView):
     # permission_required = 'personages.add_personage'  # для PermissionRequiredMixin
     model = Personage
-    success_url = reverse_lazy('all_personages') #  обязательный параметр
+    success_url = reverse_lazy('all_personages')  # обязательный параметр
     form_class = PersonageCreateForm
+
     # fields = '__all__'  #  обязательный параметр либо он, либо form_class
 
     def test_func(self):
