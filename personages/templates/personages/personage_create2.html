@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../static/main.css" >
+
+</head>
+<body>
+<h1>Hello {{user}}! </h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="container mt-2" id="fate-accelerated">
+        <div>
+            <!--        СЮДА НАДО СЕРВЕРНУЮ АВТОНУМЕРАЦИЮ-->
+            <input type="number" name="id" required="" id="id_id">
+            <!--        СЮДА НАДО НОРМАЛЬНЫЙ ВЫБОР ИЗ СПИСКА ПОЛЬЗОВАТЕЛЕЙ-->
+            <select name="user_id" required="" id="id_user_id">
+                <option value="" selected="">---------</option>
+                <option value="1">admin</option>
+                <option value="6">user_can_CRUD_personage</option>
+                <option value="7">user_only_read_personage</option>
+            </select>
+            <div data-v-5f5f1cb8="" class="sheet" isowner="true">
+                <div data-v-5f5f1cb8="" class="row">
+                    <div data-v-5f5f1cb8="" class="col-sm-6 col-md-4 order-md-2">
+                        <div data-v-5f5f1cb8="" class="row">
+                            <div data-v-5f5f1cb8="" class="col text-center"><img data-v-5f5f1cb8=""
+                                                                                 alt="FATE ACCELERATED"
+                                                                                 src="../../static/image/logo.png"
+                                                                                 class="img-fluid fate-logo"></div>
+                        </div>
+                        <div data-v-5f5f1cb8="" class="row">
+                            <div data-v-5f5f1cb8="" class="col-6 text-center">
+                                <div data-v-5f5f1cb8="" for="refresh" class="fate-header">Refresh</div>
+                                <input data-v-5f5f1cb8="" type="number" id="refresh" name="refresh"
+                                       placeholder="Refresh"
+                                       class="form-control text-center"></div>
+                            <div data-v-5f5f1cb8="" class="col-6 text-center ">
+                                <div data-v-5f5f1cb8="" for="fatepoints" class="fate-header">
+                                    FP <!----></div>
+                                <div data-v-082e5d7c="" data-v-5f5f1cb8=""><input data-v-082e5d7c="" type="number"
+                                                                                  id="fate_points" name="fate_points"
+                                                                                  placeholder="Fate Points"
+                                                                                  class="form-control text-center pr-md-0 pl-3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-v-5f5f1cb8="" class="col-sm-6 col-md-8 order-md-1">
+                        <div data-v-5f5f1cb8="" class="d-flex">
+                            <div data-v-5f5f1cb8="" class="form-group w-75 mr-1">
+                                <div data-v-5f5f1cb8="" for="name" class="fate-header">ID</div>
+                                <input data-v-5f5f1cb8="" type="text" id="pers_name" name="pers_name" placeholder="Name"
+                                       class="form-control"></div>
+                            <div data-v-5f5f1cb8="" class="form-group w-25">
+                                <div data-v-5f5f1cb8="" for="name" class="fate-header">Pronoun</div>
+                                <input data-v-5f5f1cb8="" type="text" id="pers_pronoun" name="pers_pronoun"
+                                       placeholder="Pronoun"
+                                       class="form-control"></div>
+                        </div>
+                        <div data-v-5f5f1cb8="" class="form-group"><textarea data-v-5f5f1cb8="" id="pers_description"
+                                                                             name="pers_description" rows="3"
+                                                                             placeholder="Description"
+                                                                             class="form-control"></textarea></div>
+                    </div>
+                </div>
+                <div data-v-5f5f1cb8="" class="row">
+                    <div data-v-5f5f1cb8="" class="col-sm-6 col-md-8 fate-aspects">
+                        <div data-v-5f5f1cb8="" class="form-group">
+                            <div data-v-5f5f1cb8="" for="" class="fate-header">Aspects</div>
+                        </div>
+                        <div data-v-5f5f1cb8="">
+                            <div data-v-5208aa4b="" data-v-5f5f1cb8="" class="form-group"><!---->
+                                <div data-v-5208aa4b="" class="d-flex"><!----> <input data-v-5208aa4b="" type="text"
+                                                                                      id="aspect1"
+                                                                                      name="aspect1"
+                                                                                      placeholder="High Concept"
+                                                                                      class="form-control inputAspect">
+                                </div>
+                            </div>
+                        </div>
+                        <div data-v-5f5f1cb8="">
+                            <div data-v-5208aa4b="" data-v-5f5f1cb8="" class="form-group"><!---->
+                                <div data-v-5208aa4b="" class="d-flex"><!----> <input data-v-5208aa4b="" type="text"
+                                                                                      id="aspect2"
+                                                                                      name="aspect2"
+                                                                                      placeholder="Trouble"
+                                                                                      class="form-control inputAspect">
+                                </div>
+                            </div>
+                        </div>
+                        <div data-v-5f5f1cb8="">
+                            <div data-v-5208aa4b="" data-v-5f5f1cb8="" class="form-group"><!---->
+                                <div data-v-5208aa4b="" class="d-flex"><!----> <input data-v-5208aa4b="" type="text"
+                                                                                      id="aspect3"
+                                                                                      name="aspect3"
+                                                                                      placeholder="Aspect"
+                                                                                      class="form-control inputAspect">
+                                </div>
+                            </div>
+                        </div>
+                        <div data-v-5f5f1cb8="">
+                            <div data-v-5208aa4b="" data-v-5f5f1cb8="" class="form-group"><!---->
+                                <div data-v-5208aa4b="" class="d-flex"><!----> <input data-v-5208aa4b="" type="text"
+                                                                                      id="aspect4"
+                                                                                      name="aspect4"
+                                                                                      placeholder="Aspect"
+                                                                                      class="form-control inputAspect">
+                                </div>
+                            </div>
+                        </div>
+                        <div data-v-5f5f1cb8="">
+                            <div data-v-5208aa4b="" data-v-5f5f1cb8="" class="form-group"><!---->
+                                <div data-v-5208aa4b="" class="d-flex"><!----> <input data-v-5208aa4b="" type="text"
+                                                                                      id="aspect5"
+                                                                                      name="aspect5"
+                                                                                      placeholder="Aspect"
+                                                                                      class="form-control inputAspect">
+                                </div>
+                            </div>
+                        </div>
+                        <div data-v-5f5f1cb8="">
+                            <div data-v-5208aa4b="" data-v-5f5f1cb8="" class="form-group"><!---->
+                                <div data-v-5208aa4b="" class="d-flex"><!----> <input data-v-5208aa4b="" type="text"
+                                                                                      id="aspect6"
+                                                                                      name="aspect6"
+                                                                                      placeholder="Aspect"
+                                                                                      class="form-control inputAspect">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-v-5f5f1cb8="" class="col-sm-6 col-md-4 fate-approaches">
+                        <div data-v-5f5f1cb8="" class="form-group">
+                            <div data-v-5f5f1cb8="" class="fate-header col-12">Approaches</div>
+                        </div>
+                        <div data-v-5f5f1cb8="">
+                            <div data-v-5b843f05="" data-v-5f5f1cb8="" class="form-group d-flex align-items-center">
+                                <!---->
+                                <div data-v-5b843f05="" class="w-100 mr-auto d-flex flex-column order-3 ml-2"><input
+                                        data-v-5208aa4b=""
+                                        type="text"
+                                        id="approach1_name"
+                                        name="approach1_name"
+                                        placeholder="Approach"
+                                        class="form-control inputAspect"> <!---->
+                                </div> <!----> <input data-v-5b843f05="" type="number" id="approach1_value"
+                                                      name="approach1_value" placeholder="+"
+                                                      class="form-control text-center col-3 pr-3 pr-md-0 order-2">
+                                <!---->
+                            </div>
+                        </div>
+                        <div data-v-5f5f1cb8="">
+                            <div data-v-5b843f05="" data-v-5f5f1cb8="" class="form-group d-flex align-items-center">
+                                <!---->
+                                <div data-v-5b843f05="" class="w-100 mr-auto d-flex flex-column order-3 ml-2"><input
+                                        data-v-5208aa4b=""
+                                        type="text"
+                                        id="approach2_name"
+                                        name="approach2_name"
+                                        placeholder="Approach"
+                                        class="form-control inputAspect"> <!---->
+                                </div> <!----> <input data-v-5b843f05="" type="number" id="approach2_value"
+                                                      name="approach2_value" placeholder="+"
+                                                      class="form-control text-center col-3 pr-3 pr-md-0 order-2">
+                                <!---->
+                            </div>
+                        </div>
+                        <div data-v-5f5f1cb8="">
+                            <div data-v-5b843f05="" data-v-5f5f1cb8="" class="form-group d-flex align-items-center">
+                                <!---->
+                                <div data-v-5b843f05="" class="w-100 mr-auto d-flex flex-column order-3 ml-2"><input
+                                        data-v-5208aa4b=""
+                                        type="text"
+                                        id="approach3_name"
+                                        name="approach3_name"
+                                        placeholder="Approach"
+                                        class="form-control inputAspect"> <!---->
+                                </div> <!----> <input data-v-5b843f05="" type="number" id="approach3_value"
+                                                      name="approach3_value" placeholder="+"
+                                                      class="form-control text-center col-3 pr-3 pr-md-0 order-2">
+                                <!---->
+                            </div>
+                        </div>
+                        <div data-v-5f5f1cb8="">
+                            <div data-v-5b843f05="" data-v-5f5f1cb8="" class="form-group d-flex align-items-center">
+                                <!---->
+                                <div data-v-5b843f05="" class="w-100 mr-auto d-flex flex-column order-3 ml-2"><input
+                                        data-v-5208aa4b=""
+                                        type="text"
+                                        id="approach4_name"
+                                        name="approach4_name"
+                                        placeholder="Approach"
+                                        class="form-control inputAspect"> <!---->
+                                </div> <!----> <input data-v-5b843f05="" type="number" id="approach4_value"
+                                                      name="approach4_value" placeholder="+"
+                                                      class="form-control text-center col-3 pr-3 pr-md-0 order-2">
+                                <!---->
+                            </div>
+                        </div>
+                        <div data-v-5f5f1cb8="">
+                            <div data-v-5b843f05="" data-v-5f5f1cb8="" class="form-group d-flex align-items-center">
+                                <!---->
+                                <div data-v-5b843f05="" class="w-100 mr-auto d-flex flex-column order-3 ml-2"><input
+                                        data-v-5208aa4b=""
+                                        type="text"
+                                        id="approach5_name"
+                                        name="approach5_name"
+                                        placeholder="Approach"
+                                        class="form-control inputAspect"> <!---->
+                                </div> <!----> <input data-v-5b843f05="" type="number" id="approach5_value"
+                                                      name="approach5_value" placeholder="+"
+                                                      class="form-control text-center col-3 pr-3 pr-md-0 order-2">
+                                <!---->
+                            </div>
+                        </div>
+                        <div data-v-5f5f1cb8="">
+                            <div data-v-5b843f05="" data-v-5f5f1cb8="" class="form-group d-flex align-items-center">
+                                <!---->
+                                <div data-v-5b843f05="" class="w-100 mr-auto d-flex flex-column order-3 ml-2"><input
+                                        data-v-5208aa4b=""
+                                        type="text"
+                                        id="approach6_name"
+                                        name="approach6_name"
+                                        placeholder="Approach"
+                                        class="form-control inputAspect"> <!---->
+                                </div> <!----> <input data-v-5b843f05="" type="number" id="approach6_value"
+                                                      name="approach6_value" placeholder="+"
+                                                      class="form-control text-center col-3 pr-3 pr-md-0 order-2">
+                                <!---->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div data-v-5f5f1cb8="" class="row">
+                    <div data-v-5f5f1cb8="" class="col-12 col-md-6">
+                        <div data-v-7d6ada6e="" data-v-5f5f1cb8="">
+                            <div data-v-7d6ada6e="" class="fate-header d-flex"><span data-v-7d6ada6e="" for="stunts"
+                                                                                     class="mr-auto">Stunts</span>
+                                <!---->
+                                <div data-v-7d6ada6e=""><i data-v-7d6ada6e="" title="Add Stunt/Extra"
+                                                           class="fas d-print-none fa-plus pr-2"
+                                                           style="cursor: pointer;"></i></div>
+                            </div>
+                            <div data-v-7d6ada6e="" class="form-group stuntText"><textarea data-v-7d6ada6e=""
+                                                                                           id="stunts"
+                                                                                           name="stunts" rows="25"
+                                                                                           placeholder="Stunts"
+                                                                                           class="form-control"></textarea>
+                                <!----></div>
+                        </div>
+                    </div>
+                    <div data-v-5f5f1cb8="" class="col-12 col-md-6">
+                        <div data-v-7d6ada6e="" data-v-5f5f1cb8="">
+                            <div data-v-7d6ada6e="" class="fate-header d-flex"><span data-v-7d6ada6e="" for="extras"
+                                                                                     class="mr-auto">Extras</span>
+                                <!---->
+                                <div data-v-7d6ada6e=""><i data-v-7d6ada6e="" title="Add Stunt/Extra"
+                                                           class="fas d-print-none fa-plus pr-2"
+                                                           style="cursor: pointer;"></i></div>
+                            </div>
+                            <div data-v-7d6ada6e="" class="form-group stuntText"><textarea data-v-7d6ada6e=""
+                                                                                           id="extras"
+                                                                                           name="extras" rows="25"
+                                                                                           placeholder="Extras"
+                                                                                           class="form-control"></textarea>
+                                <!----></div>
+                        </div>
+                    </div>
+                </div>
+                <div data-v-5f5f1cb8="" class="row">
+                    <div data-v-5f5f1cb8="" class="col-sm-6 col-md-4 fate-stress">
+                        <div data-v-5f5f1cb8="" class="form-group">
+                            <div data-v-5f5f1cb8="" for="" class="fate-header">Stress <!----></div>
+                        </div>
+                        <div data-v-5f5f1cb8="" class="d-flex justify-content-between">
+                            <div data-v-5f5f1cb8="">
+                                <div data-v-030e4cb2="" data-v-5f5f1cb8="" class="d-flex fate-checkbox"><label data-v-030e4cb2=""
+                                                                                                 for="stress"
+                                                                                                 class="px-1 pt-1 inputStressBoxLabel">1</label>
+                                    <input data-v-030e4cb2="" type="checkbox" id="stress1" name="stress" value="1">
+                                    <!---->
+                                </div>
+                            </div>
+                            <div data-v-5f5f1cb8="">
+                                <div data-v-030e4cb2="" data-v-5f5f1cb8="" class="d-flex fate-checkbox"><label data-v-030e4cb2=""
+                                                                                                 for="stress"
+                                                                                                 class="px-1 pt-1 inputStressBoxLabel">2</label>
+                                    <input data-v-030e4cb2="" type="checkbox" id="stress2" name="stress" value="2">
+                                    <!---->
+                                </div>
+                            </div>
+                            <div data-v-5f5f1cb8="">
+                                <div data-v-030e4cb2="" data-v-5f5f1cb8="" class="d-flex fate-checkbox"><label data-v-030e4cb2=""
+                                                                                                 for="stress"
+                                                                                                 class="px-1 pt-1 inputStressBoxLabel">3</label>
+                                    <input data-v-030e4cb2="" type="checkbox" id="stress3" name="stress" value="3">
+                                    <!---->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-v-5f5f1cb8="" class="col-sm-6 col-md-8 fate-consequences">
+                        <div data-v-5f5f1cb8="" class="form-group">
+                            <div data-v-5f5f1cb8="" class="fate-header col-12">Consequences <!----></div>
+                        </div>
+                        <div data-v-5f5f1cb8="">
+                            <div data-v-1ba241e0="" data-v-5f5f1cb8="" class="form-group d-flex flex-column"><!---->
+                                <div data-v-1ba241e0="" class="d-flex align-items-center"><!----> <label
+                                        data-v-1ba241e0=""
+                                        class="pr-3">2</label>
+                                    <input data-v-1ba241e0="" type="text" id="consequences_mild"
+                                           name="consequences_mild"
+                                           placeholder="Mild" class="form-control"></div>
+                            </div>
+                        </div>
+                        <div data-v-5f5f1cb8="">
+                            <div data-v-1ba241e0="" data-v-5f5f1cb8="" class="form-group d-flex flex-column"><!---->
+                                <div data-v-1ba241e0="" class="d-flex align-items-center"><!----> <label
+                                        data-v-1ba241e0=""
+                                        class="pr-3">4</label>
+                                    <input data-v-1ba241e0="" type="text" id="consequences_moderate"
+                                           name="consequences_moderate" placeholder="Moderate" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div data-v-5f5f1cb8="">
+                            <div data-v-1ba241e0="" data-v-5f5f1cb8="" class="form-group d-flex flex-column"><!---->
+                                <div data-v-1ba241e0="" class="d-flex align-items-center"><!----> <label
+                                        data-v-1ba241e0=""
+                                        class="pr-3">6</label>
+                                    <input data-v-1ba241e0="" type="text" id="consequences_severe"
+                                           name="consequences_severe" placeholder="Severe" class="form-control"></div>
+                            </div>
+                        </div>
+                    </div>
+                <input type="submit" value="Save" class="btn btn-dark">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

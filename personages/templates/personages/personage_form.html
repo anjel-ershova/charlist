@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Personage action</title>
+
 </head>
 <body>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-<!--    {{ form.as_table }} дорабатывать таблицу дополнительно-->
-<!--    {{ form.as_ul }} дорабатывать список дополнительно -->
+    <!--    {{ form.as_table }} дорабатывать таблицу дополнительно-->
+    <!--    {{ form.as_ul }} дорабатывать список дополнительно -->
 
     <input type="submit" value="save">
 </form>

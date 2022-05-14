@@ -5,7 +5,7 @@ from myauth.models import CharlistUser
 
 
 class Personage(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(CharlistUser, on_delete=models.SET_NULL, null=True)
     # group_id = models.ForeignKey(на группу пользователей)
     pers_name = models.CharField(max_length=64)
@@ -45,6 +45,9 @@ class Personage(models.Model):
     def get_parties(self):
         party = self.personageparty_set.all()
         return ', '.join(map(str, party))
+
+    def get_aspects(self):
+        return self.aspect1, self.aspect2, self.aspect3, self.aspect4, self.aspect5, self.aspect6
 
 
 class PersonageParty(models.Model):

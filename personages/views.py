@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import UserPassesTestMixin  # ,LoginRequiredMixin, PermissionRequiredMixin
-from django.shortcuts import render  # , get_object_or_404
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin, PermissionRequiredMixin
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView, UpdateView
 from personages.models import Personage
@@ -20,16 +20,25 @@ def all_personages(request):
 
 
 # вариант FBV - Function Detailed View
-# def personage_details(request, pk):
-#     get_personage_details = get_object_or_404(Personage, pk=pk)
-#
-#     context = {
-#         'page_title': 'Detail title',
-#         'personage': get_personage_details, # контекст следует называть четко по имени класса
-#     }
-#
-#     return render(request, 'personages/personage_detail.html', context=context)
+def personage_details2(request, pk):
+    get_personage_details = get_object_or_404(Personage, pk=pk)
 
+    context = {
+        'page_title': 'Detail title',
+        'personage': get_personage_details,  # контекст следует называть четко по имени класса
+    }
+
+    return render(request, 'personages/personage_detail_v2.html', context=context)
+
+def personage_create2(request):
+    personage = Personage()
+
+    context = {
+        'page_title': 'Detail title',
+        'personage': personage,  # контекст следует называть четко по имени класса
+    }
+
+    return render(request, 'personages/personage_create2.html', context=context)
 
 class PageTitleMixin:
     page_title = ''
@@ -53,26 +62,34 @@ class PersonageDetailView(PageTitleMixin, DetailView):
 # @login_required # ERROR
 # @permission_required('personages.add_personage')
 # @user_passes_test(lambda u: u.is_superuser)
-# class PersonageCreateView(LoginRequiredMixin, CreateView):
+class PersonageCreateView(LoginRequiredMixin, CreateView):
 # class PersonageCreateView(PermissionRequiredMixin, CreateView):
-class PersonageCreateView(UserPassesTestMixin, CreateView):
+# class PersonageCreateView(UserPassesTestMixin, CreateView):
     # permission_required = 'personages.add_personage'  # для PermissionRequiredMixin
     model = Personage
     success_url = reverse_lazy('all_personages')  # обязательный параметр
-    form_class = PersonageCreateForm
+    # form_class = PersonageCreateForm
 
-    # fields = '__all__'  #  обязательный параметр либо он, либо form_class
+    fields = '__all__'  #  обязательный параметр либо он, либо form_class, можно перечислить все или сделать через map
+    # exclude = ('user_id')
 
     def test_func(self):
         print(self.request.user)
-        return self.request.user.is_superuser
-        # if self.request.user.is_anonimous:  # ERROR не срабатывает
-        #     print('Login to create')
+        # return self.request.user.is_superuser
+        if self.request.user.is_anonimous:  #  ошибка 'CharlistUser' object has no attribute 'is_anonimous'
+            print('Login to create')
 
     # все проверки на права делать на уровне вьюх
 
 
-class PersonageUpdateView(UpdateView):
+class PersonageUpdateView(UserPassesTestMixin, UpdateView):
     model = Personage
     success_url = reverse_lazy('all_personages')
     fields = '__all__'
+
+    def test_func(self):
+        print(self.request.user)
+        print(self.model.id)
+        print(self.model.user_id)
+        if self.request.user == self.model.user_id:
+            print("It's not your personage")
