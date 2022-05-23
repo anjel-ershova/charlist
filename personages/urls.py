@@ -12,7 +12,7 @@ urlpatterns = [
     path('create/', personages.PersonageCreateView.as_view(template_name="personages/personage_create2.html"), name='create'),
     path('create2/', personages.personage_create2, name='create2'),
     path('details2/<int:pk>/', personages.personage_details2, name='details2'),
-    path('update/<int:pk>/', personages.PersonageUpdateView.as_view(), name='update'),
+    path('update/<int:pk>/', personages.PersonageUpdateView.as_view(template_name="personages/personage_update.html"), name='update'),
 
 
 ]

@@ -18,6 +18,7 @@ class Personage(models.Model):
     aspect3 = models.CharField(max_length=256, blank=True)
     aspect4 = models.CharField(max_length=256, blank=True)
     aspect5 = models.CharField(max_length=256, blank=True)
+    aspect6 = models.CharField(max_length=256, blank=True)
     approach1_name = models.CharField(max_length=256, blank=True)
     approach1_value = models.IntegerField(null=True)
     approach2_name = models.CharField(max_length=256, blank=True)

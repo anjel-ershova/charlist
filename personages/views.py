@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
@@ -10,7 +10,8 @@ from personages.forms import PersonageCreateForm
 
 @login_required
 def all_personages(request):
-    all_personages = Personage.objects.all()
+    all_personages = Personage.objects.filter(
+        user_id=request.user)
 
     context = {
         'all_personages': all_personages,
@@ -28,7 +29,7 @@ def personage_details2(request, pk):
         'personage': get_personage_details,  # контекст следует называть четко по имени класса
     }
 
-    return render(request, 'personages/personage_detail_v2.html', context=context)
+    return render(request, 'personages/personage_update.html', context=context)
 
 def personage_create2(request):
     personage = Personage()
@@ -57,7 +58,10 @@ class PersonageDetailView(PageTitleMixin, DetailView):
     # pk_url_kwarg = 'pk' # нужно, если как primary key используется не 'pk' или 'slug'
     # context_object_name = 'personage_details' # можно переопределять, если нужен кастом,
     # но если не определено, за контекст берется имя класса
-
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).filter(
+            user_id=self.request.user
+        )
 
 # @login_required # ERROR
 # @permission_required('personages.add_personage')
@@ -82,14 +86,25 @@ class PersonageCreateView(LoginRequiredMixin, CreateView):
     # все проверки на права делать на уровне вьюх
 
 
-class PersonageUpdateView(UserPassesTestMixin, UpdateView):
+# class PersonageUpdateView(UserPassesTestMixin, UpdateView):
+#     model = Personage
+#     success_url = reverse_lazy('all_personages')
+#     fields = '__all__'
+#
+#     def test_func(self):
+#         print(self.request.user)
+#         print(self.model.id)
+#         print(self.model.user_id)
+#         if self.request.user == self.model.user_id:
+#             print("It's not your personage")
+
+
+class PersonageUpdateView(LoginRequiredMixin, UpdateView):
     model = Personage
     success_url = reverse_lazy('all_personages')
-    fields = '__all__'
+    form_class = PersonageCreateForm
 
-    def test_func(self):
-        print(self.request.user)
-        print(self.model.id)
-        print(self.model.user_id)
-        if self.request.user == self.model.user_id:
-            print("It's not your personage")
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
