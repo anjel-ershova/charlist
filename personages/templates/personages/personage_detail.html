@@ -14,9 +14,8 @@
 
 
 {% block main_content %}
-<h1>Hello {{user}}! </h1>
-
-<a href="{% url 'personages:update' pk=personage.pk %}" class="btn btn-dark">Update this personage</a>
+<a href="{% url 'personages:update' pk=personage.pk %}" class="btn btn-dark"
+   style="margin-top: 16px;margin-left: 40px;">Update this personage</a>
 
 <form method="post">
     {% csrf_token %}

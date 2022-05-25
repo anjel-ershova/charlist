@@ -63,27 +63,15 @@ class PersonageDetailView(PageTitleMixin, DetailView):
             user_id=self.request.user
         )
 
-# @login_required # ERROR
-# @permission_required('personages.add_personage')
-# @user_passes_test(lambda u: u.is_superuser)
 class PersonageCreateView(LoginRequiredMixin, CreateView):
-# class PersonageCreateView(PermissionRequiredMixin, CreateView):
-# class PersonageCreateView(UserPassesTestMixin, CreateView):
-    # permission_required = 'personages.add_personage'  # для PermissionRequiredMixin
     model = Personage
-    success_url = reverse_lazy('all_personages')  # обязательный параметр
-    # form_class = PersonageCreateForm
+    success_url = reverse_lazy('all_personages')
+    form_class = PersonageCreateForm
 
-    fields = '__all__'  #  обязательный параметр либо он, либо form_class, можно перечислить все или сделать через map
-    # exclude = ('user_id')
-
-    def test_func(self):
-        print(self.request.user)
-        # return self.request.user.is_superuser
-        if self.request.user.is_anonimous:  #  ошибка 'CharlistUser' object has no attribute 'is_anonimous'
-            print('Login to create')
-
-    # все проверки на права делать на уровне вьюх
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
 
 
 # class PersonageUpdateView(UserPassesTestMixin, UpdateView):
