@@ -3,16 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Personages</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/main.css">
 </head>
+
+{% extends 'personages/base.html' %}
 <body>
-<a href="{% url 'personages:create'%}">Create new personage</a>
-<br><a href="{% url 'myauth:register' %}"> register </a></br>
-<br><a href="{% url 'myauth:login' %}"> login </a></br>
+{% block main_content %}
 
 <h1>View all personages</h1>
 <ul>{% for el in all_personages %}
-    <li><a href="{% url 'personages:details' pk=el.pk %}"> {{ el }}  </a></li>
+    <li><a href="{% url 'personages:details' pk=el.pk %}" class="col-sm-6 col-md-4 order-md-2"> {{ el }}  </a></li>
 {% endfor %}
+
+    {% endblock %}
 </ul>
 </body>
 </html>
