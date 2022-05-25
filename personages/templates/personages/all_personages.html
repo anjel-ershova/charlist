@@ -14,11 +14,23 @@
 {% block main_content %}
 
 <h1>View all personages</h1>
-<ul>{% for el in all_personages %}
-    <li><a href="{% url 'personages:details' pk=el.pk %}" class="col-sm-6 col-md-4 order-md-2"> {{ el }}  </a></li>
-{% endfor %}
 
-    {% endblock %}
-</ul>
+<ol class="list-group list-group-numbered"> {% for el in all_personages %}
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+            <a href="{% url 'personages:details' pk=el.pk %}">
+                <div class="fw-bold">{{ el.pers_name }}</div>
+            </a>
+            <small>{{ el.pers_description }}</small>
+
+        </div>
+        {% if el.get_parties %}
+        <span class="badge bg-primary rounded-pill"> {{ el.get_parties }} </span>
+        {% endif %}
+    </li>
+
+    {% endfor %}
+</ol>
+{% endblock %}
 </body>
 </html>
