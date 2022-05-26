@@ -39,7 +39,7 @@ def personage_create2(request):
         'personage': personage,  # контекст следует называть четко по имени класса
     }
 
-    return render(request, 'personages/personage_create2.html', context=context)
+    return render(request, 'personages/personage_create.html', context=context)
 
 class PageTitleMixin:
     page_title = ''
