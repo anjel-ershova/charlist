@@ -15,7 +15,6 @@ class PersonageCreateForm(ModelForm):
 
         for name, field in self.fields.items():
             print(name)
-            # print(field)
             field.widget.attrs['class'] = 'form-control'
 
     def save(self, commit=True):
